@@ -62,43 +62,44 @@ int main() {
    IU->cargarDatos(usersCollection);
    string cedula;
    string pass;
-   cout << "\t\tBIENVENIDO\n\n";
-   cout << "Iniciar sesion\n";
-   cout << "Ingrese su cedula: ";
-   while (!valido) {
-      cin >> cedula;
-      valido = correcto(cedula);
-      if (!valido) {
-         cout << "cedula invalida\n";
-      }
-   }
 
-   usuarioSesion = IU->ingresarCedula(cedula);
-   cout << "\nCedula del usuario: " << usuarioSesion->getCedula() << endl;
-   bool correcto = false;
-   if (usuarioSesion->getContrasena() == " ") {
-      cout << "Ingrese su contrsena" << endl;
-      while (!correcto && pass != "-1") {
-         correcto = IU->registrarContrasena(pass);
+   while (!valido && cedula != "-1") {
+      cout << "\t\tBIENVENIDO\n\n";
+      cout << "Iniciar sesion\n";
+      cout << "Ingrese su cedula: (ingrese -1 para salir)\n";
+      while (!valido) {
+         cin >> cedula;
+         valido = correcto(cedula);
+         if (!valido) {
+            cout << "cedula invalida\n";
+         }
       }
-   } else {
-      cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
-      while (!correcto && pass != "-1") {
-         cin >> pass;
-         correcto = IU->ingresarContrasena(pass);
-         if (!correcto && pass != "-1")
-               cout << "Contrasena incorrecta" << endl;
+
+      usuarioSesion = IU->ingresarCedula(cedula);
+      cout << "\nCedula del usuario: " << usuarioSesion->getCedula() << endl;
+      bool correcto = false;
+      if (usuarioSesion->getContrasena() == " ") {
+         cout << "Ingrese su contrsena" << endl;
+         while (!correcto && pass != "-1") {
+            correcto = IU->registrarContrasena(pass);
+         }
+      } else {
+         cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+         while (!correcto && pass != "-1") {
+            cin >> pass;
+            correcto = IU->ingresarContrasena(pass);
+            if (!correcto && pass != "-1")
+                  cout << "Contrasena incorrecta" << endl;
+         }
       }
-   }
 
-   if (pass == "-1") {
-      return 0;
-   }
+      if (pass == "-1") {
+         return 0;
+      }
 
-   if (usuarioSesion->getCedula() != "11111111") {
-      bool salir = false;
-      int option = 0;
-      while (!salir) {
+      if (usuarioSesion->getCedula() != "11111111") {
+         bool salirusuario = false;
+         int option = 0;
          cout << "\nBienvenido " << usuarioSesion->getNombre() << endl;
          if (dynamic_cast<Socio*>(usuarioSesion->getCategoria())) {
                cout << "Que desea hacer socio?" << endl;
@@ -114,33 +115,33 @@ int main() {
                      cout << "Cancelar reserva" << endl;
                      break;
                   case 3:
-                     salir = true;
+                     salirusuario = true;
                      break;
                   default:
                      break;
-               }
-         } else if (dynamic_cast<Medico*>(usuarioSesion->getCategoria())) {
-               cout << "Que desea hacer medico?" << endl;
-               cout << "1 - " << endl;
-               cout << "2 - " << endl;
-               cout << "3 - " << endl;
-               cout << "4 - " << endl;
-               cout << "5 - Salir medico" << endl;
-               cin >> option;
-               switch (option) {
-                  case 1:
-                     cout << "Realizar reserva" << endl;
-                     break;
-                  case 2:
-                     cout << "Cancelar reserva" << endl;
-                     break;
-                  case 5:
-                     salir = true;
-                     break;
-                  default:
-                     break;
-               }
-         } else if (dynamic_cast<Administrativo*>(usuarioSesion->getCategoria())) {
+                  }
+            } else if (dynamic_cast<Medico*>(usuarioSesion->getCategoria())) {
+                  cout << "Que desea hacer medico?" << endl;
+                  cout << "1 - " << endl;
+                  cout << "2 - " << endl;
+                  cout << "3 - " << endl;
+                  cout << "4 - " << endl;
+                  cout << "5 - Salir medico" << endl;
+                  cin >> option;
+                  switch (option) {
+                     case 1:
+                        cout << "Realizar reserva" << endl;
+                        break;
+                     case 2:
+                        cout << "Cancelar reserva" << endl;
+                        break;
+                     case 5:
+                        salirusuario = true;
+                        break;
+                     default:
+                        break;
+                  }
+            } else if (dynamic_cast<Administrativo*>(usuarioSesion->getCategoria())) {
                string input;
                cout << "Que desea hacer admin?" << endl;
                cout << "1 - Alta/Reactivacion de usuario" << endl;
@@ -156,7 +157,7 @@ int main() {
                switch (option) {
                   case 1:
                      while (input != "-1") {
-                           cout << "Ingrese una cedula (ingrese -1 si desea salir): ";
+                           cout << "Ingrese una cedula (ingrese -1 si desea salirusuario): ";
                            cin >> input;
                            if (input == "-1"){
                               break;
@@ -214,12 +215,12 @@ int main() {
                      cout << "Cancelar reserva" << endl;
                      break;
                   case 5:
-                     salir = true;
+                     salirusuario = true;
                      break;
                   default:
                      break;
                }
-         }
+            }
       }
    }
 
@@ -227,4 +228,4 @@ int main() {
    iAU->salir();
    ICS->cerrarSesion();
    return 0;
-}
+}   
