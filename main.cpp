@@ -178,29 +178,29 @@ int main() {
                cout << "5 - Salir admin" << endl;
                cin >> option;
 
-                     string nombre, apellido, sexo, categoria;
-                     int anio, mes, dia;
-                     bool encuentra;
-                     switch (option) {
-                        case 1:
-                           while (input != "-1") {
-                                 cout << "Ingrese una cedula (ingrese -1 si desea salirusuario): ";
-                                 cin >> input;
-                                 if (input == "-1"){
-                                    break;
-                                 }                           
-                                 encuentra = IU->ingresarCedulaAlta(input);
-                                 if (!encuentra) {
-                                    cout << "ingrese el nombre del usuario: ";
-                                    cin >> nombre;
-                                    cout << "\ningrese el apellido del usuario: ";
-                                    cin >> apellido;
-                                    cout << "\ningrese el sexo del usuario: ";
-                                    cin >> sexo;
-                                    cout << "\ningrese el anio, mes y dia de nacimiento del usuario: ";
-                                    cin >> anio >> mes >> dia;
-                                    cout << "\ningrese la categoria del usuario: ";
-                                    cin >> categoria;
+               string nombre, apellido, sexo, categoria;
+               int anio, mes, dia;
+               DtUsuario user = DtUsuario();
+               switch (option) {
+                  case 1:
+                     while (input != "-1") {
+                           cout << "Ingrese una cedula (ingrese -1 si desea salirusuario): ";
+                           cin >> input;
+                           if (input == "-1"){
+                              break;
+                           }                           
+                           user = IU->ingresarCedulaAlta(input);
+                           if (user.getCedula() == "11111111") {
+                              cout << "ingrese el nombre del usuario: ";
+                              cin >> nombre;
+                              cout << "\ningrese el apellido del usuario: ";
+                              cin >> apellido;
+                              cout << "\ningrese el sexo del usuario: ";
+                              cin >> sexo;
+                              cout << "\ningrese el anio, mes y dia de nacimiento del usuario: ";
+                              cin >> anio >> mes >> dia;
+                              cout << "\ningrese la categoria del usuario: ";
+                              cin >> categoria;
 
                                     Fecha fecha(anio, mes, dia);
                                     if (categoria == "socio")
@@ -261,4 +261,5 @@ int main() {
    iAU->salir();
    ICS->cerrarSesion();
    return 0;
+}   
 }   
