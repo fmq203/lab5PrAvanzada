@@ -60,8 +60,8 @@ int main() {
    IU = f->getIUsuario();
 
    IU->cargarDatos(usersCollection);
-   string cedula;
-   string pass;
+   string cedula = "";
+   string pass = "";
 
    while (!valido && cedula != "-1") {
       cout << "\t\tBIENVENIDO\n\n";
@@ -71,6 +71,10 @@ int main() {
          cin >> cedula;
          valido = correcto(cedula);
          if (!valido) {
+            if (cedula == "-1") {
+               cedula = "";
+               break;
+            }
             cout << "cedula invalida\n";
          }
       }
@@ -222,8 +226,8 @@ int main() {
                }
             }
       }
+      valido = false;
    }
-
    iAD->agregarDescripcion("descripcion");
    iAU->salir();
    ICS->cerrarSesion();
