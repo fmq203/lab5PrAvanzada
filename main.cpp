@@ -36,7 +36,7 @@ int main() {
    IUsuario* IU;
    Fecha fecha = Fecha(2001, 10, 22);
 
-   Usuario* usuarioSesion = new Usuario();
+   DtUsuario usuarioSesion = DtUsuario();
    map<string, Usuario*> usersCollection;
    Socio* catS = new Socio();
    Medico* catM = new Medico();
