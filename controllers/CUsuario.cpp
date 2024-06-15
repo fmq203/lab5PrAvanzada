@@ -27,7 +27,11 @@ Usuario* CUsuario::ingresarCedula(string ci){
     map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);
     Usuario* u = it->second;
-    this->userSesion = u;
+    if (it != usuarios.end()) {
+        this->userSesion = u;
+    } else {
+        u = NULL;
+    }
     return u;
 }
 
