@@ -86,7 +86,7 @@ int main() {
             }
          }
          usuarioSesion = IU->ingresarCedula(cedula);
-         if (usuarioSesion.getCategoria() != nullptr) {
+         if (usuarioSesion.getCedula() != "11111111") {
             if (usuarioSesion.getContrasena() == " ") {
                cout << "Ingrese su contrsena" << endl;
                while (!passCorrecto && pass != "-1") {
