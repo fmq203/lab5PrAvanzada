@@ -86,23 +86,26 @@ int main() {
             }
          }
          usuarioSesion = IU->ingresarCedula(cedula);
-
-         if (usuarioSesion.getContrasena() == " ") {
-            cout << "Ingrese su contrsena" << endl;
-            while (!passCorrecto && pass != "-1") {
-               cin >> pass;
-               passCorrecto = IU->registrarContrasena(pass);
-               if (!passCorrecto && pass != "-1")
-                     cout << "Contrasena invalida" << endl;
+         if (usuarioSesion.getCategoria() != nullptr) {
+            if (usuarioSesion.getContrasena() == " ") {
+               cout << "Ingrese su contrsena" << endl;
+               while (!passCorrecto && pass != "-1") {
+                  cin >> pass;
+                  passCorrecto = IU->registrarContrasena(pass);
+                  if (!passCorrecto && pass != "-1")
+                        cout << "Contrasena invalida" << endl;
+               }
+            } else {
+               cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+               while (!passCorrecto && pass != "-1") {
+                  cin >> pass;
+                  passCorrecto = IU->ingresarContrasena(pass);
+                  if (!passCorrecto && pass != "-1")
+                        cout << "Contrasena incorrecta" << endl;
+               }
             }
          } else {
-            cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
-            while (!passCorrecto && pass != "-1") {
-               cin >> pass;
-               passCorrecto = IU->ingresarContrasena(pass);
-               if (!passCorrecto && pass != "-1")
-                     cout << "Contrasena incorrecta" << endl;
-            }
+            cout << "Usuario inexistente" << endl;
          }
          break;
       
